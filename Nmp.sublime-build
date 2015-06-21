@@ -1,4 +1,4 @@
 {
-	"cmd": ["nmp.exe", "$file"],
-	"selector":"source.nmp"
+ "cmd": ["nmp.exe", "$file"],
+ "selector":"source.nmp"
 }
