@@ -1,0 +1,133 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+name: nmp
+scopeName: source.nmp
+fileTypes: [nmp, nmpinc]
+uuid: a400b095-4742-41f3-b8d2-7039fcc6ec10
+
+patterns:
+#- name: meta.regionblock.nmp
+#  begin: '#nmpRegion\(\s*?[cC]#\s*?\)'
+#  end: '#nmpRegion\(\s*?c#\s*?\)'
+#  patterns:
+#  - include: $self
+#  - include: source.nmp
+#
+#- comment: inline define macro
+#- name: keyword.other.nmp
+#  begin: (#.define\()
+#  end: (\))\s+$
+#  captures:
+#    '1' : {name: entity.name.function.nmp}
+#  patterns:
+#  - include: $self
+#
+#- comment: push and pop buffer
+#  name: support.function.nmp
+#  match: '#\.{0,1}(push[bB]uffer|pop[bB]uffer|save[bB]uffer|fetch[bB]uffer)\(.*?\)$'
+#  captures:
+#    '1': {name: support.function.nmp}
+
+
+- name: string.quoted.triple.nmp
+  begin: '`'
+  end: ''''
+  patterns:
+  - include: $self
+
+- comment: single quotes
+  name: string.quoted.single.nmp
+  begin: ''''
+  end: ''''
+  patterns:
+  - include: $self
+
+- comment: double quotes
+  name: string.quoted.single.nmp
+  begin: ''''
+  end: ''''
+  patterns:
+  - include: $self
+
+
+#- comment: 'post processing @someName()'
+#  name: support.function.nmp
+#  match: '((@)\w+?)\(([^)]*?)\)'
+#  captures:
+#    '2': {name: entity.name.type.nmp}
+#    '3': {name: variable.parameter.nmp}
+
+#
+# should divivde into 2, dot and no dot
+#
+#- comment: '#.someName(...) or #someName(...)'
+#  name: support.function.nmp
+#  match: '#\.\w+?\(([^)]*?)\)'
+#  captures:
+#    '1': {name: variable.parameter.nmp}
+
+- comment:
+  name: support.function.nmp
+  begin: '#\.\w+?\('
+  end: '\)'
+  patterns:
+  - include: '#self'
+  - name: string.quoted.double.nmp
+    begin: '"'
+    end: '"'
+    patterns:
+    - include: '#self'
+    - name: support.other.nmp
+      match: .
+  - name: string.quoted.single.nmp
+    begin: "'|`"
+    end: "'"
+    patterns:
+    - include: '#self'
+    - name: support.other.nmp
+      match: .
+
+
+
+#  name: support.function.nmp
+#  match: '(#?\w+?(\s|\.))'
+
+
+- name: comment.line.nmp
+  match: ;{2,}.*$
+
+- name: comment.block.nmp
+  begin: \(#@
+  end: '#\)'
+
+
+
+
+
+
+
+#- name: entity.name.function.nmp
+#  begin: \((#(defmacro|foreach|forloop|if|json|list|tb)).*?\)
+#  beginCaptures:
+#    '1': {name: keyword.source.nmp}
+#  end: \((#(endmacro|endforeach|endforloop|endif|endjson|endlist|endtb))\)
+#  endCaptures:
+#    '1': {name: keyword.source.nmp}
+#  patterns:
+#  - include: $self
+
+#- name: entity.name.function.nmp
+#  begin: (\(##&)
+#  beginCaptures:
+#    '1': {name: keyword.source.nmp}
+#  end: (##\))
+#  endCaptures:
+#    '1': {name: keyword.source.nmp}
+#  patterns:
+#  - include: $self
+#
+#- name: comment.line.nmp
+#  match: ;{2,}.*$
+
+#- name: comment.block.nmp
+#  begin: \(#@
+#  end: '#\)'

@@ -1,0 +1,6 @@
+
+
+
+#genSrcFile( fred )@Divert( `src' )
+
+#.saveBuffer( `src', #.echo( 'fred is here' ), "double", true)
